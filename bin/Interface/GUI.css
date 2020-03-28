@@ -1,0 +1,16 @@
+:root {
+  width: 200;
+  height: 200;
+  background-color: white;
+}
+h1 {
+  text-align: center;
+  color: black;
+  font-size: 24px;
+}
+
+body {
+  text-align: center;
+  color: green;
+  font-size: 12;
+}

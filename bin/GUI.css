@@ -1,0 +1,9 @@
+.root {
+  -fx-width: 200;
+  -fx-height: 200;
+  -fx-background-color: #FFCC3E;
+}
+
+.button {
+  -fx-background-color: white;
+}
