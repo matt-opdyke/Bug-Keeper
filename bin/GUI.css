@@ -5,5 +5,9 @@
 }
 
 .button {
-  -fx-background-color: white;
+  -fx-background-color: #98FF5C;
+}
+
+.text-field{
+  -fx-control-inner-background: #98FF5C;
 }

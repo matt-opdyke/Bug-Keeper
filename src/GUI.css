@@ -1,7 +1,3 @@
-:root{
-  -fx-background-color: #FFCC3E;
-}
-
 .root {
   -fx-width: 200;
   -fx-height: 200;
@@ -9,6 +5,9 @@
 }
 
 .button {
-  -fx-background-color: white;
+  -fx-background-color: #98FF5C;
 }
 
+.text-field{
+  -fx-control-inner-background: #98FF5C;
+}

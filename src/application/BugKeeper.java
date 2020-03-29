@@ -1,12 +1,9 @@
 package application;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class BugKeeper {
 
-	public ArrayList<Ticket> tickList = new ArrayList<>();
+	public ArrayList<Ticket> ticketList = new ArrayList<>();
 
 	/**
 	 * Default constructor for BugKeeper
@@ -22,21 +19,33 @@ public class BugKeeper {
 		Ticket newTick = new Ticket (bug, line);
 		newTick.setDate();
 		newTick.setTime();
-		tickList.add(newTick);
+		ticketList.add(newTick);
 		return true;
 	}
 	
 	public ArrayList<Ticket> readTickets(){
-		return tickList;
+		return ticketList;
 	}
-
-	public static void main(String args[]) {
-		Ticket t = new Ticket("bug", "0");
-
-		t.setDate();
-		t.setTime();
-		t.formatTicket();
-		// System.out.println(t.time);
-
+	
+	public void updateTime (Ticket ticket) { 
+		ticket.setDate();
+		ticket.setTime();
+	}
+	
+	public void updateMessage (Ticket ticket, String newMessage) {
+		ticket.bug = newMessage;
+	}
+	
+	public void updateLine (Ticket ticket, String newLine) { 
+		ticket.line = newLine;
+	}
+	
+	public void deleteTicket(Ticket ticket) {
+		for (int i = 0; i < ticketList.size(); i ++) {
+			if (ticketList.get(i).equals(ticket)) {
+				ticketList.remove(i);
+				break;
+			}
+		}
 	}
 }
