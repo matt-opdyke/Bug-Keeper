@@ -33,18 +33,9 @@ public class Ticket {
 
 	}
 
-	/**
-	 * Sets the time for the ticket
-	 */
-	public void setTime() {
-		time = LocalTime.now();
-	}
-
-	/**
-	 * Sets the date for the ticket
-	 */
-	public void setDate() {
+	public void updateTime() {
 		date = LocalDate.now();
+		time = LocalTime.now();
 	}
 
 	/**

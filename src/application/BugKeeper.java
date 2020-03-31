@@ -17,19 +17,13 @@ public class BugKeeper {
 		}
 		
 		Ticket newTick = new Ticket (bug, line);
-		newTick.setDate();
-		newTick.setTime();
+		newTick.updateTime();
 		ticketList.add(newTick);
 		return true;
 	}
 	
 	public ArrayList<Ticket> readTickets(){
 		return ticketList;
-	}
-	
-	public void updateTime (Ticket ticket) { 
-		ticket.setDate();
-		ticket.setTime();
 	}
 	
 	public void updateMessage (Ticket ticket, String newMessage) {

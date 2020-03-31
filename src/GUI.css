@@ -1,13 +1,26 @@
 .root {
   -fx-width: 200;
   -fx-height: 200;
-  -fx-background-color: #FFCC3E;
+  -fx-background-color: #E5FCD0;
 }
 
 .button {
-  -fx-background-color: #98FF5C;
+  -fx-background-color: #88C278;
+  -fx-border-spacing: 500px;
+  -fx-border-color: black;
+  -fx-border-radius:2px;
+  -fx-border-width: 2px;
+  -fx-padding: 10px;
+  -fx-border-spacing:15px;
 }
 
 .text-field{
-  -fx-control-inner-background: #98FF5C;
+  -fx-control-inner-background: #88C278;
+  -fx-border-color: black;
+  -fx-border-radius:2px;
+  -fx-border-width: 2px;
+}
+
+#home-button {
+  -fx-background-color: #FF514E;
 }
