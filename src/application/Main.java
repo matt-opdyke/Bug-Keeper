@@ -1,14 +1,17 @@
 package application;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,7 +38,7 @@ public class Main extends Application {
 	}
 
 	private void home() {
-		GridPane root = new GridPane();
+		VBox root = new VBox();
 		Button ret = new Button("Return to the home page");
 		ret.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -53,7 +56,10 @@ public class Main extends Application {
 		Button delete = new Button("Resolved a logged bug");
 		delete.setOnAction(d -> deleteScreen());
 		Label welcomeLabel = new Label("Welcome to Bug Keeper! Select one of the following buttons to begin");
-		root.addColumn(0, welcomeLabel, create, read, update, delete);
+
+		root.setId("home-root");
+
+		root.getChildren().addAll(welcomeLabel, create, read, update, delete);
 
 		applyScene(root);
 		stage.show();
@@ -75,7 +81,7 @@ public class Main extends Application {
 		TextField bugInput = new TextField();
 		TextField lineInput = new TextField();
 		GridPane gridpane = new GridPane();
-		Button ret = new Button("Back to home");
+		Button ret = new Button("Back");
 		ret.setId("home-button");
 		ret.setOnAction(c -> home());
 		gridpane.addRow(0, new Label("Please enter a bug "), bugInput);
@@ -105,16 +111,17 @@ public class Main extends Application {
 			Ticket currTick = bugkeeper.readTickets().get(currIndex);
 			GridPane gridpane = new GridPane();
 			ArrayList<Ticket> tickArr = bugkeeper.readTickets();
+			Label ticketLabel = new Label(currTick.formatTicket());
+			Button leftArrow = new Button("<---");
 
-			for (int i = 0; i < bugkeeper.readTickets().size(); i++) {
+			Button rightArrow = new Button("--->");
+			
+			for (int i = 0; i < tickArr.size(); i++) {
 				gridpane.add(new Label(tickArr.get(i).formatTicket()), i + 1, 0);
 			}
-
-			Label tickLabel = new Label(currTick.formatTicket());
-			gridpane.add(tickLabel, 0, 0);
 			display.getChildren().add(gridpane);
 		}
-		Button ret = new Button("Back to home");
+		Button ret = new Button("Back");
 		ret.setId("home-button");
 		ret.setOnAction(c -> home());
 		display.getChildren().add(ret);
@@ -122,12 +129,21 @@ public class Main extends Application {
 
 	}
 
-	public int handleLeftArrow(int index, int upperBound) {
+	public int handleLeftArrow(int index) {
 		if (index == 0) {
 			return 0;
 		} else {
+			return index--;
+		}
+	}
+
+	public int handleRightArrow(int index, int upperBound) {
+		if (index == upperBound) {
+			return index;
+		} else {
 			return index++;
 		}
+		
 	}
 
 	/**
@@ -153,7 +169,7 @@ public class Main extends Application {
 				i++;
 			} while (i < ticketList.size());
 		}
-		Button ret = new Button("Back to home");
+		Button ret = new Button("Back");
 		ret.setId("home-button");
 		ret.setOnAction(c -> home());
 		display.getChildren().add(ret);
@@ -205,7 +221,7 @@ public class Main extends Application {
 
 		});
 
-		Button ret = new Button("Back to home");
+		Button ret = new Button("Back");
 		ret.setId("home-button");
 		ret.setOnAction(c -> home());
 		gridpane.add(update, 1, 3);
@@ -236,27 +252,30 @@ public class Main extends Application {
 				i++;
 			} while (i < ticketList.size());
 		}
-		Button ret = new Button("Back to home");
+		Button ret = new Button("Back");
 		ret.setId("home-button");
 		ret.setOnAction(c -> home());
 		display.getChildren().add(ret);
 		applyScene(display);
 	}
-	
-	public void deleteConfirmation (Ticket ticket) {
+
+	public void deleteConfirmation(Ticket ticket) {
 		VBox display = new VBox();
 		Label message = new Label("Are you sure you would like to resolve this bug?");
 		message.setId("delete-confirmation");
-		Label bugData = new Label (ticket.formatTicket());
+		Label bugData = new Label(ticket.formatTicket());
 		bugData.setId("delete-confirmation");
-		
+
 		HBox options = new HBox();
-		Button confirm = new Button ("Confirm");
-		confirm.setOnAction(c -> {bugkeeper.deleteTicket(ticket); deleteScreen();});
-		Button deny = new Button ("Deny");
+		Button confirm = new Button("Confirm");
+		confirm.setOnAction(c -> {
+			bugkeeper.deleteTicket(ticket);
+			deleteScreen();
+		});
+		Button deny = new Button("Deny");
 		deny.setOnAction(d -> deleteScreen());
 		options.getChildren().addAll(confirm, deny);
-		
+
 		display.getChildren().addAll(message, options);
 		applyScene(display);
 	}

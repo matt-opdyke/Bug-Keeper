@@ -6,12 +6,12 @@
 
 .button {
   -fx-background-color: #88C278;
-  -fx-border-spacing: 500px;
   -fx-border-color: black;
   -fx-border-radius:2px;
   -fx-border-width: 2px;
-  -fx-padding: 10px;
-  -fx-border-spacing:15px;
+  -fx-padding: 5px;
+  -fx-spacing:20px;
+  -fx-pref-width: 200px;
 }
 
 .text-field{
@@ -23,4 +23,12 @@
 
 #home-button {
   -fx-background-color: #FF514E;
+  -fx-pref-width: 60px;
 }
+
+#home-root{
+  -fx-spacing: 10;
+  -fx-padding: 10 20 10 20;
+  -fx-alignment: center;
+}
+
