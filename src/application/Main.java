@@ -39,18 +39,11 @@ public class Main extends Application {
 
 	private void home() {
 		VBox root = new VBox();
-		Button ret = new Button("Return to the home page");
-		ret.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				applyScene(root);
-			}
-		});
 
 		Button create = new Button("Log a new bug");
 		create.setOnAction(c -> createScreen());
 		Button read = new Button("View logged bugs");
-		read.setOnAction(r -> readScreen());
+		read.setOnAction(r -> readScreen(0));
 		Button update = new Button("Update a logged bug");
 		update.setOnAction(u -> updateScreen());
 		Button delete = new Button("Resolved a logged bug");
@@ -100,26 +93,34 @@ public class Main extends Application {
 		applyScene(display);
 	}
 
-	public void readScreen() {
+	public void readScreen(int index) {
 		VBox display = new VBox();
+		display.setId("read-display");
 		if (bugkeeper.readTickets().size() < 1) {
 			display.getChildren().add(new Label("There are no bugs :)"));
 		} else {
+			System.out.print(index);
 			display.getChildren()
 					.add(new Label("You may use the left and right arrows to look through the logged bugs!"));
-			int currIndex = 0;
-			Ticket currTick = bugkeeper.readTickets().get(currIndex);
-			GridPane gridpane = new GridPane();
-			ArrayList<Ticket> tickArr = bugkeeper.readTickets();
+			Ticket currTick = bugkeeper.readTickets().get(index);
+			//GridPane gridpane = new GridPane();
 			Label ticketLabel = new Label(currTick.formatTicket());
+			
 			Button leftArrow = new Button("<---");
+			leftArrow.setId("arrow-button");
+			leftArrow.setOnAction(c -> readScreen(handleLeftArrow(index)));
 
 			Button rightArrow = new Button("--->");
+			rightArrow.setId("arrow-button");
+			rightArrow.setOnAction(c -> readScreen(handleRightArrow(index, bugkeeper.readTickets().size() - 1)));
 			
-			for (int i = 0; i < tickArr.size(); i++) {
-				gridpane.add(new Label(tickArr.get(i).formatTicket()), i + 1, 0);
-			}
-			display.getChildren().add(gridpane);
+			/*
+			 * for (int i = 0; i < tickArr.size(); i++) { gridpane.add(new
+			 * Label(tickArr.get(i).formatTicket()), i + 1, 0); }
+			 * display.getChildren().add(gridpane);
+			 */
+			
+			display.getChildren().add(new HBox (leftArrow, ticketLabel, rightArrow));
 		}
 		Button ret = new Button("Back");
 		ret.setId("home-button");
@@ -133,7 +134,7 @@ public class Main extends Application {
 		if (index == 0) {
 			return 0;
 		} else {
-			return index--;
+			return index - 1;
 		}
 	}
 
@@ -141,7 +142,7 @@ public class Main extends Application {
 		if (index == upperBound) {
 			return index;
 		} else {
-			return index++;
+			return index + 1;
 		}
 		
 	}
@@ -218,7 +219,6 @@ public class Main extends Application {
 				Label upsuc = new Label("The bug was updated correctly!");
 				gridpane.add(upsuc, 0, 3);
 			}
-
 		});
 
 		Button ret = new Button("Back");

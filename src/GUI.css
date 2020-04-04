@@ -1,28 +1,35 @@
 .root {
   -fx-width: 200;
   -fx-height: 200;
-  -fx-background-color: #E5FCD0;
+  -fx-background-color: #1D2140;
+  -fx-text-fill: #767AB5;
 }
 
 .button {
-  -fx-background-color: #88C278;
+  -fx-background-color: #A6BFFF;
   -fx-border-color: black;
   -fx-border-radius:2px;
   -fx-border-width: 2px;
   -fx-padding: 5px;
   -fx-spacing:20px;
   -fx-pref-width: 200px;
+  -fx-text-fill: #767AB5;
 }
 
 .text-field{
-  -fx-control-inner-background: #88C278;
+  -fx-control-inner-background: #A6BFFF;
   -fx-border-color: black;
   -fx-border-radius:2px;
   -fx-border-width: 2px;
 }
 
+.label {
+  -fx-text-fill: #767AB5;
+}
+
 #home-button {
   -fx-background-color: #FF514E;
+  -fx-text-fill:white;
   -fx-pref-width: 60px;
 }
 
@@ -30,5 +37,16 @@
   -fx-spacing: 10;
   -fx-padding: 10 20 10 20;
   -fx-alignment: center;
+}
+
+#arrow-button {
+  -fx-pref-width: 100px;
+  -fx-pref-height: 10px;
+  -fx-padding: 10 20 10 20;
+  -fx-spacing: 200px;
+}
+
+#read-display {
+
 }
 
