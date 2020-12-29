@@ -18,8 +18,8 @@ public class Ticket {
 	/**
 	 * Constructor for Ticket object
 	 * 
-	 * @param bug  the bug that is being logged
-	 * @param line the line where the bug is located (optional)
+	 * @param bug:  The bug that is being logged
+	 * @param line: The line where the bug is located (optional)
 	 */
 	public Ticket(String bug, String line) {
 		this.bug = bug;
@@ -27,20 +27,22 @@ public class Ticket {
 	}
 
 	/**
-	 * default constructor for Ticket
+	 * The default constructor for Ticket
 	 */
 	public Ticket() {
-
 	}
 
+	/**
+	 * This method updates the time for the ticket in case the bug needs to be updated
+	 */
 	public void updateTime() {
 		date = LocalDate.now();
 		time = LocalTime.now();
 	}
 
 	/**
-	 * Formats the data held by the Ticket object and prints to console USED FOR
-	 * TESTING PURPOSES
+	 * Formats the data held by the Ticket object and prints to console 
+	 * USED FOR TESTING PURPOSES
 	 */
 	public String formatTicket() {
 		return "Bug: " + bug + "\nLine: " + line + "\nDate: " + date + "\nTime: " + time;

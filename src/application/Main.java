@@ -23,13 +23,30 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Main class that handles the running of the program and GUI
+ * 
+ * @author mattopdyke
+ *
+ */
 public class Main extends Application {
+	// Set general variables for the program
 	private static final int WINDOW_WIDTH = 500;
 	private static final int WINDOW_HEIGHT = 300;
 	private static final String APP_TITLE = "Bug Keeper";
+
+	// Initialize a new BugKeeper object
 	BugKeeper bugkeeper = new BugKeeper();
+
+	// Create the stage
 	private static Stage stage;
 
+	/**
+	 * This method sets the stage, calls the method that creates and displays the
+	 * home screen then sets the stage to be displayed
+	 * 
+	 * @param primaryStage: The stage to be used for execution
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
@@ -37,27 +54,47 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * The home method that creates and displays the application's home screen
+	 */
 	private void home() {
+		// Use a VBox as our root
 		VBox root = new VBox();
 
+		// Upon clicking the create button, change screen to the "Create Screen"
 		Button create = new Button("Log a new bug");
 		create.setOnAction(c -> createScreen());
+
+		// Upon clicking the read button, change screen to the "Read Screen"
 		Button read = new Button("View logged bugs");
 		read.setOnAction(r -> readScreen(0));
+
+		// Upon clicking the update button, change screen to the "Update Screen"
 		Button update = new Button("Update a logged bug");
 		update.setOnAction(u -> updateScreen());
+
+		// Upon clicking the delete button, change screen to the "Delete Screen"
 		Button delete = new Button("Resolved a logged bug");
 		delete.setOnAction(d -> deleteScreen());
+
+		// Set the welcome message upon startup
 		Label welcomeLabel = new Label("Welcome to Bug Keeper! Select one of the following buttons to begin");
 
+		// Set the ID of the root VBox for styling
 		root.setId("home-root");
 
+		// add all of the screen details and apply the scene
 		root.getChildren().addAll(welcomeLabel, create, read, update, delete);
-
 		applyScene(root);
 		stage.show();
 	}
 
+	/**
+	 * Helper method that applies the parent changes to the stage and updates which
+	 * screen is displayed
+	 * 
+	 * @param parent
+	 */
 	private void applyScene(Parent parent) {
 		Scene scene = new Scene(parent, WINDOW_WIDTH, WINDOW_HEIGHT);
 		scene.getStylesheets().add(("GUI.css"));
@@ -65,6 +102,13 @@ public class Main extends Application {
 		stage.setScene(scene);
 	}
 
+	/**
+	 * Helper method that will create a new ticket within the BugKeeper object with
+	 * the bug description and the line number that are inputed
+	 * 
+	 * @param bug
+	 * @param line
+	 */
 	public void logNewBug(String bug, String line) {
 		bugkeeper.createTicket(bug, line);
 	}
@@ -84,8 +128,10 @@ public class Main extends Application {
 		addBug.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
 				logNewBug(bugInput.getText(), lineInput.getText());
-				Label confirmation = new Label("Your bug has been logged!");
-				display.getChildren().add(confirmation);
+				if (display.getChildren().size() == 2) {
+					Label confirmation = new Label("Your bug has been logged!");
+					display.getChildren().add(confirmation);
+				}
 			}
 		});
 		display.getChildren().addAll(gridpane, addBug);
@@ -103,9 +149,9 @@ public class Main extends Application {
 			display.getChildren()
 					.add(new Label("You may use the left and right arrows to look through the logged bugs!"));
 			Ticket currTick = bugkeeper.readTickets().get(index);
-			//GridPane gridpane = new GridPane();
+			// GridPane gridpane = new GridPane();
 			Label ticketLabel = new Label(currTick.formatTicket());
-			
+
 			Button leftArrow = new Button("<---");
 			leftArrow.setId("arrow-button");
 			leftArrow.setOnAction(c -> readScreen(handleLeftArrow(index)));
@@ -113,14 +159,14 @@ public class Main extends Application {
 			Button rightArrow = new Button("--->");
 			rightArrow.setId("arrow-button");
 			rightArrow.setOnAction(c -> readScreen(handleRightArrow(index, bugkeeper.readTickets().size() - 1)));
-			
+
 			/*
 			 * for (int i = 0; i < tickArr.size(); i++) { gridpane.add(new
 			 * Label(tickArr.get(i).formatTicket()), i + 1, 0); }
 			 * display.getChildren().add(gridpane);
 			 */
-			
-			display.getChildren().add(new HBox (leftArrow, ticketLabel, rightArrow));
+
+			display.getChildren().add(new HBox(leftArrow, ticketLabel, rightArrow));
 		}
 		Button ret = new Button("Back");
 		ret.setId("home-button");
@@ -144,7 +190,7 @@ public class Main extends Application {
 		} else {
 			return index + 1;
 		}
-		
+
 	}
 
 	/**
