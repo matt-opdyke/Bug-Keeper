@@ -7,18 +7,21 @@
 
 .button {
   -fx-background-color: #A6BFFF;
-  -fx-border-color: black;
-  -fx-border-radius:2px;
+  -fx-background-radius:3px;
+  -fx-border-color: #767AB5;
+  -fx-border-radius:1px;
   -fx-border-width: 2px;
   -fx-padding: 5px;
   -fx-spacing:20px;
   -fx-pref-width: 200px;
   -fx-text-fill: #767AB5;
+  -fx-background-insets: 0;
 }
 
 .text-field{
   -fx-control-inner-background: #A6BFFF;
-  -fx-border-color: black;
+  -fx-border-color: #767AB5;
+  -fx-spacing: 20px;
   -fx-border-radius:2px;
   -fx-border-width: 2px;
 }
@@ -31,6 +34,7 @@
   -fx-background-color: #FF514E;
   -fx-text-fill:white;
   -fx-pref-width: 60px;
+  -fx-indent: 100px;
 }
 
 #home-root{
@@ -44,6 +48,11 @@
   -fx-pref-height: 10px;
   -fx-padding: 10 20 10 20;
   -fx-spacing: 200px;
+}
+
+#add-bug{
+  -fx-pref-width: 250px;
+  -fx-spacing:100px
 }
 
 #read-display {

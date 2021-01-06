@@ -137,6 +137,7 @@ public class Main extends Application {
 
 		// Implements functionality for the "add bug" button
 		Button addBug = new Button("Log the bug to the system!");
+		addBug.setId("add-bug");
 		addBug.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
 				logNewBug(bugInput.getText(), lineInput.getText());
@@ -148,6 +149,7 @@ public class Main extends Application {
 				}
 			}
 		});
+		gridpane.addRow(2, addBug);
 
 		// Add screen elements to the root and apply the scene
 		display.getChildren().addAll(gridpane, addBug);
